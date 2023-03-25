@@ -59,20 +59,12 @@ public class PostagemController {
 		return ResponseEntity.ok(postagemRepository.findAllByTituloContainingIgnoreCase(titulo));
 	}
 
-	/*
-	 * @PostMapping public ResponseEntity<Postagem> post(@Valid @RequestBody
-	 * Postagem postagem) {
-	 * 
-	 * return ResponseEntity.status(HttpStatus.CREATED)
-	 * .body(postagemRepository.save(postagem)); }
-	 */
-
 	@PostMapping
 	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem) {
 		if (temaRepository.existsById(postagem.getTema().getId()))
 			return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
 	}
 
 	@PutMapping
@@ -82,7 +74,7 @@ public class PostagemController {
 			if (temaRepository.existsById(postagem.getTema().getId()))
 				return ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem));
 
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
 
 		}
 

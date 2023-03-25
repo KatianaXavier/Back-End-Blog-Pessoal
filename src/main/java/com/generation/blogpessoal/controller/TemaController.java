@@ -39,9 +39,7 @@ public class TemaController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Tema> getById(@PathVariable Long id) {
-		return temaRepository.findById(id)
-				.map(resposta -> ResponseEntity
-				.ok(resposta))
+		return temaRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
@@ -58,10 +56,9 @@ public class TemaController {
 	@PutMapping
 	public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
 		return temaRepository.findById(tema.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-				.body(temaRepository.save(tema)))
+				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(temaRepository.save(tema)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-	
+
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -69,8 +66,9 @@ public class TemaController {
 	public void delete(@PathVariable Long id) {
 		Optional<Tema> tema = temaRepository.findById(id);
 
-		if (tema.isEmpty())
+		if (tema.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 
 		temaRepository.deleteById(id);
 

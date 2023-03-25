@@ -24,7 +24,7 @@ public class Postagem {
 
 	// indica a chave primária da tabela de postagem
 	@Id
-	
+
 	// equivalente ao auto_increment na criação da chave primária
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -41,10 +41,14 @@ public class Postagem {
 	// pega a hora e dia
 	@UpdateTimestamp
 	private LocalDateTime data;
-	
+
 	@ManyToOne
-	@JsonIgnoreProperties ("postagem")
+	@JsonIgnoreProperties("postagem")
 	private Tema tema;
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
 	// getters e setters
 	public Long getId() {
@@ -85,6 +89,14 @@ public class Postagem {
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
