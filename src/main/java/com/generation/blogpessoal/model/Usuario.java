@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,31 +19,47 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull(message = "O atributo 'nome' é obrigatório!")
 	private String nome;
-	
+
 	@NotNull(message = "O atributo 'usuário' é obrigatório!")
 	@Email(message = "O atributo 'usuário' deve ser um e-mail válido!")
 	private String usuario;
-	
-	@NotNull(message = "O atributo 'senha' é obrigatório!")
+
+	@NotBlank(message = "O atributo 'senha' é obrigatório!")
 	@Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
 	private String senha;
-	
+
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres!")
 	private String foto;
-	
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 
+	// métodos construtores
+	
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+
+	}
+
+	public Usuario() { }
+
+	// getters e setters
+	
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
