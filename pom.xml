@@ -12,7 +12,7 @@
 	<artifactId>blogpessoal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blogpessoal</name>
-	<description>Projeto &quot;Blog Pessoal&quot;, desenvolvido durante o bloco II do bootcamp Java FullStack, da Genration Brasil. </description>
+	<description>Projeto &quot;Blog Pessoal&quot;, desenvolvido durante o bloco II do bootcamp Java FullStack, da Generation Brasil. </description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -54,6 +54,15 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
