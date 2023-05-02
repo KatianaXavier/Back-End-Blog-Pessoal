@@ -35,7 +35,7 @@ public class Postagem {
 	private String titulo;
 
 	@NotBlank(message = "O atributo 'texto' é obrigatório!")
-	@Size(min = 10, max = 100, message = "O atributo 'texto' deve conter no mínimo 10 e no máximo 100 caracteres!")
+	@Size(min = 10, max = 700, message = "O atributo 'texto' deve conter no mínimo 10 e no máximo 700 caracteres!")
 	private String texto;
 
 	// pega a hora e dia
